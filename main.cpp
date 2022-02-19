@@ -187,16 +187,6 @@ string solution(string new_id) {
 
     for (int i = 0; i < new_id.size(); i++) {
         new_id[i] = tolower(new_id[i]);
-        if (i == 0) {
-            if (new_id[i] == '.') {
-                for (int j = i + 1; j < new_id.size(); j++) {
-                    if (new_id[i] != new_id[j]) {
-                        new_id.erase(i, j);
-                        break;
-                    }
-                }
-            }
-        } 
         if (new_id[i] == '.' || new_id[i] == '-' || new_id[i] == '_') {
             if (new_id[i] == '.') {
                 for (int j = i; j < new_id.size(); j++) {
@@ -212,6 +202,14 @@ string solution(string new_id) {
         }
         if (isdigit(new_id[i]) != 0 || isalpha(new_id[i]) != 0) {
             answer.push_back(new_id[i]);
+        }
+    }
+    if (answer[0] == '.') {
+        for (int i = 0; i < answer.size(); i++) {
+            if (answer[0] != answer[i]) {
+                answer.erase(0, i);
+                break;
+            }
         }
     }
     if (answer.size() > 15) {
@@ -239,6 +237,12 @@ string solution(string new_id) {
 
     return answer;
 }
+
+int main() {
+    string new_id = "...!@BaT#*..y.abcdefghijklm";
+    solution(new_id);
+}
+
 // isdigit 숫자
 // isalpha 알파벳
 
@@ -339,3 +343,52 @@ int main() {
 }
 
 
+// 음양 더하기 
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> absolutes, vector<bool> signs) {
+    int answer = 0;
+    for (int i = 0; i < signs.size(); i++) {
+        if (signs[i] == true) {
+            answer += absolutes[i];
+        } else {
+            answer -= absolutes[i];
+        }
+    }
+
+    return answer;
+}
+
+int main() {
+    vector<int> absolutes = {4,7,12};
+    vector<bool> signs = {true,false,true};
+    return 0;
+}
+
+// 없는수 더하기
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<int> numbers) {
+    int answer = 45;
+    for (int num : numbers) {
+        answer -= num;
+    }
+    return answer;
+}
+
+int main() {
+    vector<int> numbers = {1,2,3,4,6,7,8,0};
+    return 0;
+}
+
+
+
+//
