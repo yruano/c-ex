@@ -391,4 +391,81 @@ int main() {
 
 
 
-//
+// 완전탑색
+// 테스트케이스가 뭐가 더있는지 모르겠다 그냥 랜덤으로 적었는지만 잘 나왔다 흠.. 어렵군 ㅋㅋ
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+vector<int> solution(vector<int> answers) {
+    vector<int> answer;
+    vector<int> one = {1, 2, 3, 4, 5};
+    vector<int> two = {2, 1, 2, 3, 2, 4, 2, 5};
+    vector<int> tree = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+    int one_count = 0;
+    int two_count = 0;
+    int tree_count = 0;
+    int one_vul = 0;
+    int two_vul = 0;
+    int tree_vul = 0;
+    for (int i = 0; i < answers.size(); i++) {
+        if (answers[i] == one[one_count]) {
+            one_vul += 1;
+        }
+        if (answers[i] == two[two_count]) {
+            two_vul += 1;
+        }
+        if (answers[i] == tree[tree_count]) {
+            tree_vul += 1;
+        }
+        if (one_count == one.size() - 1) {
+            one_count = 0;
+        }
+        if (two_count == two.size() - 1) {
+            two_count = 0;
+        }
+        if (tree_count == tree.size() - 1) {
+            tree_count = 0;
+        }
+        one_count += 1;
+        two_count += 1;
+        tree_count += 1;
+    }
+    std::cout << "one_vul : " << one_vul << "\n";
+    std::cout << "two_vul : " << two_vul << "\n";
+    std::cout << "tree_vul : " << tree_vul << "\n";
+
+    if (one_vul > two_vul && one_vul > tree_vul) {
+        answer.push_back(1);
+    } else if (two_vul > one_vul && two_vul > tree_vul) {
+        answer.push_back(2);
+    } else if (tree_vul > one_vul && tree_vul > two_vul) {
+        answer.push_back(3);
+    } else if (one_vul == two_vul && two_vul == tree_vul) {
+        answer.push_back(1);
+        answer.push_back(2);
+        answer.push_back(3);
+    } else if (one_vul == two_vul) {
+        answer.push_back(1);
+        answer.push_back(2);
+    } else if (two_vul == tree_vul) {
+        answer.push_back(2);
+        answer.push_back(3);
+    } else if (one_vul == tree_vul) {
+        answer.push_back(1);
+        answer.push_back(3);
+    }
+    for (int i : answer) {
+        std::cout << i;
+    }
+
+    return answer;
+}
+
+int main() {
+  vector<int> answers = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,5};
+  solution(answers);
+  return 0;
+}
