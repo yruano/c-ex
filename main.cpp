@@ -469,3 +469,55 @@ int main() {
   solution(answers);
   return 0;
 }
+
+
+// 백준에 있는문제
+// 흠 맞는 지는 모름
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    vector<int> w_list;
+    unordered_map<int, int> v_w_list;
+    int n, k, v, w;
+    cin >> n >> k;
+    int vul = 0;
+
+    for (int i = 0; i < n; i++) {
+        cin >> w >> v;
+        if (w <= k) {
+            v_w_list[w] = v;
+            w_list.push_back(w);
+        }
+    }
+
+    sort(w_list.begin(), w_list.end());
+
+    for (int i : w_list) {
+        int v_vul = v_w_list[i];
+        int w_vul = i;
+        for (int j = 0; j < w_list.size(); j++) {
+            if (i != w_list[j]) {
+                w_vul += w_list[j];
+                if (k >= w_vul) {
+                    v_vul += v_w_list[w_list[j]];
+                } else {
+                    w_vul -= w_list[j];
+                }
+            }
+        }
+        if (vul == 0 && v_vul > vul) {
+            vul = v_vul;
+        }
+    }
+
+    cout << vul << "\n";
+
+    return 0;
+}
