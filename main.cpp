@@ -492,8 +492,10 @@ int main() {
     for (int i = 0; i < n; i++) {
         cin >> w >> v;
         if (w <= k) {
-            v_w_list[w] = v;
-            w_list.push_back(w);
+            if (v_w_list[w] < v || v_w_list[w] == 0) {
+                v_w_list[w] = v;
+                w_list.push_back(w);
+            }
         }
     }
 
@@ -510,10 +512,10 @@ int main() {
                 } else {
                     w_vul -= w_list[j];
                 }
+                if (vul == 0 || vul < v_vul) {
+                    vul = v_vul;
+                }
             }
-        }
-        if (vul == 0 && v_vul > vul) {
-            vul = v_vul;
         }
     }
 
