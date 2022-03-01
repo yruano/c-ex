@@ -566,3 +566,30 @@ int main() {
   solution(board, moves);
   return 0;
 }
+
+// 폰켓몬
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+int solution(std::vector<int> nums) {
+  int answer = 0;
+  std::unordered_map<int, int> vul;
+  
+  for (int num : nums) {
+    vul[num] += 1;
+    if (nums.size() / 2 == vul.size()) {
+      break;
+      }
+    }
+    answer = vul.size();
+
+    return answer;
+}
+
+int main() {
+  std::vector<int> nums = {3,1,2,3};
+  solution(nums);
+  
+  return 0;
+}
