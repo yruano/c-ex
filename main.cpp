@@ -523,3 +523,46 @@ int main() {
 
     return 0;
 }
+
+// 크레인 인형뽑기
+// 글을 끝까지 보자
+#include <iostream>
+#include <iterator>
+#include <string>
+#include <vector>
+
+int solution(std::vector<std::vector<int>> board, std::vector<int> moves) {
+  int answer = 0;
+  std::vector<int> num;
+  for (int mov : moves) {
+    for (int i = 0; i < board.size(); i++) {
+      if (board[i][mov - 1] != 0) {
+        num.push_back(board[i][mov - 1]);
+        board[i][mov - 1] = 0;
+        if (num.size() > 1) {
+          if (num[num.size() - 1] == num[num.size() - 2]) {
+            num.pop_back();
+            num.pop_back();
+            answer += 2;
+          }
+          break;
+        }
+        break;
+      }
+    }
+  }
+
+  return answer;
+}
+
+int main() {
+  std::vector<std::vector<int>> board = {{0,0,0,0,0},
+                                         {0,0,1,0,3},
+                                         {0,2,5,0,1},
+                                         {4,2,4,4,2},
+                                         {3,5,1,3,1}};
+  std::vector<int> moves = {1,5,3,5,1,2,1,4};
+
+  solution(board, moves);
+  return 0;
+}
